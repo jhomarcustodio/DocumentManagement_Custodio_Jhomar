@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SDMS.Api/SDMS.Api.csproj" />
+  <Project Path="SDMS.Test/SDMS.Test.csproj" />
+</Solution>
