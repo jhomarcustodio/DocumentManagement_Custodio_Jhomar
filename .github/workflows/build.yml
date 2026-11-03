@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+env:
+  DOTNET_VERSION: "10.x"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: SimpleDocumentManagementSystem
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore SimpleDocumentManagementSystem.slnx
+
+      - name: Build
+        run: dotnet build SimpleDocumentManagementSystem.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test SimpleDocumentManagementSystem.slnx --configuration Release --no-restore --no-build --verbosity normal
+
+      - name: Publish
+        run: dotnet publish SimpleDocumentManagementSystem.slnx --configuration Release --no-restore --no-build
