@@ -2,66 +2,43 @@
 
 ## Overview
 
-This is a simple document management system that supports CRUD operations on documents.
+This is a simple document management system that supports document creation, retrieval, and deletion.
 
-This project does not implement authentication or authorization, meaning all endpoints are accessible anonymously.
+The project does not implement authentication or authorization, meaning all API endpoints are accessible anonymously.
 
 ## Prerequisites
 
 Before running the project, make sure you have the following installed:
 
-- [.NET SDK 10 or higher](https://dotnet.microsoft.com/download)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- PostgreSQL
-
-## Setup
-
-This guide covers how to run the project on Windows. Running the project on macOS or Linux may require additional steps that are not covered in this document.
-
-The project uses PostgreSQL as its relational database. You can either install PostgreSQL locally or run it inside a Docker container. Instructions for setting up PostgreSQL are not included in this document, as there are plenty of guides available online.
-
-**Database Credentials**
-
-The application uses the following default PostgreSQL credentials:
-
-- **Username:** `postgres`
-- **Password:** `postgres`
-
-Make sure your PostgreSQL instance is configured accordingly.
 
 ## Running the Application
 
-You can run the API project using the .NET CLI.
+Make sure Docker Desktop is running before proceeding.
 
-**Option 1: From the API project directory**
-
-Navigate to the `SDMS.Api` folder and execute:
+From the project root directory, run the following command to build and start the application and its database:
 
 ```bash
-dotnet run
+docker compose -f ./compose.yaml up -d --build
 ```
 
-**Option 2: From the project root directory**
+Once the containers are running, the API will be accessible at:
 
-Execute the following command:
+[http://localhost:5000](http://localhost:5000)
+
+The application automatically creates the database and its tables on startup.
+
+To stop the application, run:
 
 ```bash
-dotnet run --project ./SDMS.Api/SDMS.Api.csproj
+docker compose -f ./compose.yaml down
 ```
-
-Once running, the API will be accessible at:
-
-```text
-http://localhost:5000
-```
-
-The application automatically creates the database and its tables when it starts.
 
 ## Running the Tests
 
 The project includes automated tests that can be executed using the .NET CLI.
 
-From the project root directory, run:
+Make sure the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) is installed, then run the following command from the project root directory:
 
 ```bash
 dotnet test
