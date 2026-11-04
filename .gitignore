@@ -480,3 +480,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Docker related folders and files
+.containers/
+compose.debug.yaml
